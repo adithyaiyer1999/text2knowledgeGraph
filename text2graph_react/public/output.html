@@ -1,0 +1,242 @@
+<html>
+<head>
+
+<!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+
+
+<style>
+ul, #myUL {
+    list-style-type: none;
+}
+li {
+    padding-top: 5px;padding-bottom: 5px;
+}
+#myUL {
+    margin: 0;
+    padding: 0;
+}
+.caret {
+    cursor: pointer;
+    user-select: none;
+    font-family: 'Inconsolata', monospace;
+}
+.caret::before {
+    content: " \25B6";
+    display: inline-block;
+margin-right: 6px;
+}
+.caret-down::before {
+    transform: rotate(90deg); 
+}
+.nested {
+    display: none;
+}
+.active {
+    display: block;
+}
+.header {
+    text-align: left;
+    background: #f1f1f1;
+}
+.text-c {
+    color:green;
+    font-family:'Inconsolata',monospace;
+}
+.text-h {
+    font-family:'Inconsolata',monospace;
+}
+</style>
+
+
+</head>
+
+<body>
+<nav class="navbar sticky-top navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+             Your JSON to Tree
+        </a>
+    </nav>
+
+<ul class ="myUL"> 
+<li><span class="caret">REPORT</span> 
+<ul class ="nested"> 
+<li><span class="caret">Fontainebleau : </span> 
+   <ul class ="nested"> 
+  <li><span class="caret">Basic Information : </span> 
+     <ul class ="nested"> 
+  <li><span class="text-h">Pronunciation : </span><span class="text-c">/ˈfɒntɪnbloʊ/ FON-tin-bloh</span></li>
+  <li><span class="text-h">Location : </span><span class="text-c">metropolitan area of Paris, France</span></li>
+  <li><span class="text-h">Distance from Paris : </span><span class="text-c">55.5 kilometres (34.5 mi) south-southeast</span></li>
+  <li><span class="text-h">Land Area : </span><span class="text-c">largest in the Île-de-France region</span></li>
+  <li><span class="text-h">Closest Prefecture : </span><span class="text-c">Seine-et-Marne Prefecture, Melun</span></li>
+    <li><span class="caret">Rail Stations : [2]</span> 
+     <ul class ="nested"> 
+    <li><span class="text-c">Fontainebleau–Avon</span>
+</li> 
+    <li><span class="text-c">Thomery</span>
+</li> 
+     </ul> 
+     </li> 
+     </ul> 
+   </li> 
+   <li><span class="caret">History : </span> 
+     <ul class ="nested"> 
+    <li><span class="caret">Origins of the Name : [6]</span> 
+     <ul class ="nested"> 
+    <li><span class="text-c">Fons Bleaudi</span>
+</li> 
+    <li><span class="text-c">Fons Bliaudi</span>
+</li> 
+    <li><span class="text-c">Fons Blaadi</span>
+</li> 
+    <li><span class="text-c">Fontem blahaud</span>
+</li> 
+    <li><span class="text-c">Fontaine belle eau</span>
+</li> 
+    <li><span class="text-c">Fons Bellaqueus</span>
+</li> 
+     </ul> 
+     </li> 
+     <li><span class="caret">Historical Events : [14]</span> 
+     <ul class ="nested"> 
+    <li><span class="text-c">Endowment by Louis VII</span>
+</li> 
+    <li><span class="text-c">Residence of Louis IX</span>
+</li> 
+    <li><span class="text-c">Philip the Fair's birth and death</span>
+</li> 
+    <li><span class="text-c">Transformation into a royal palace</span>
+</li> 
+    <li><span class="text-c">Edict of Fontainebleau</span>
+</li> 
+    <li><span class="text-c">1762 Treaty of Fontainebleau</span>
+</li> 
+    <li><span class="text-c">Preliminary negotiations for the 1763 Treaty of Paris</span>
+</li> 
+    <li><span class="text-c">French Revolution renaming</span>
+</li> 
+    <li><span class="text-c">Treaty of Fontainebleau in 1807</span>
+</li> 
+    <li><span class="text-c">Pope Pius VII's imprisonment</span>
+</li> 
+    <li><span class="text-c">Napoleon's farewell</span>
+</li> 
+    <li><span class="text-c">1814 Treaty of Fontainebleau</span>
+</li> 
+    <li><span class="text-c">Franco-Vietnamese Conference in 1946</span>
+</li> 
+    <li><span class="text-c">NATO base until 1967</span>
+</li> 
+     </ul> 
+     </li> 
+     </ul> 
+   </li> 
+   <li><span class="caret">Urban Area : </span> 
+     <ul class ="nested"> 
+  <li><span class="text-h">Population : </span><span class="text-c">36,724 inhabitants (2018)</span></li>
+  <li><span class="text-h">Relation to Paris : </span><span class="text-c">satellite of Paris</span></li>
+    <li><span class="caret">Neighbouring Communes : [2]</span> 
+     <ul class ="nested"> 
+    <li><span class="text-c">Avon</span>
+</li> 
+    <li><span class="text-c">three other smaller communes</span>
+</li> 
+     </ul> 
+     </li> 
+     </ul> 
+   </li> 
+   <li><span class="caret">Attractions : </span> 
+     <ul class ="nested"> 
+    <li><span class="caret">Forest of Fontainebleau : </span> 
+       <ul class ="nested"> 
+   <li><span class="text-h">Reputation : </span><span class="text-c">large and scenic</span></li>
+   <li><span class="text-h">Visitors : </span><span class="text-c">Parisians' weekend getaway</span></li>
+   <li><span class="text-h">Wildlife Conservation : </span><span class="text-c">true</span></li>
+      <li><span class="caret">Features : [3]</span> 
+       <ul class ="nested"> 
+     <li><span class="text-c">rocky formations</span>
+</li> 
+     <li><span class="text-c">rare service tree</span>
+</li> 
+     <li><span class="text-c">bouldering area</span>
+</li> 
+       </ul> 
+       </li> 
+       </ul> 
+     </li> 
+     <li><span class="caret">Château de Fontainebleau : </span> 
+       <ul class ="nested"> 
+   <li><span class="text-h">Ownership History : </span><span class="text-c">once belonged to the kings of France</span></li>
+   <li><span class="text-h">Renaissance Connection : </span><span class="text-c">true</span></li>
+   <li><span class="text-h">Tourists : </span><span class="text-c">300,000 people visit annually</span></li>
+      </ul> 
+     </li> 
+   <li><span class="text-h">INSEAD Business School : </span><span class="text-c">one of the world's most elite business schools</span></li>
+    <li><span class="caret">Other : [2]</span> 
+     <ul class ="nested"> 
+    <li><span class="text-c">historic tennis court</span>
+</li> 
+    <li><span class="text-c">Centre hospitalier Sud Seine et Marne</span>
+</li> 
+     </ul> 
+     </li> 
+     </ul> 
+   </li> 
+   <li><span class="caret">Notable People : [6]</span> 
+   <ul class ="nested"> 
+   <li><span class="text-c">Aga Khan IV</span>
+</li> 
+   <li><span class="text-c">Alfonso XIII</span>
+</li> 
+   <li><span class="text-c">Arnold Bennett</span>
+</li> 
+   <li><span class="text-c">Rosa Bonheur</span>
+</li> 
+   <li><span class="text-c">Gabrièle Buffet-Picabia</span>
+</li> 
+   <li><span class="text-c">Christina, Queen of Sweden</span>
+</li> 
+   </ul> 
+   </li> 
+   <li><span class="caret">Twinning with Other Cities : [7]</span> 
+   <ul class ="nested"> 
+   <li><span class="text-c">Konstanz, Germany</span>
+</li> 
+   <li><span class="text-c">Richmond-upon-Thames, England</span>
+</li> 
+   <li><span class="text-c">Siem Reap, Cambodia</span>
+</li> 
+   <li><span class="text-c">Nanjing, China</span>
+</li> 
+   <li><span class="text-c">Lodi, Italy</span>
+</li> 
+   <li><span class="text-c">Sintra, Portugal</span>
+</li> 
+   <li><span class="text-c">Alba Iulia, Romania</span>
+</li> 
+   </ul> 
+   </li> 
+   </ul> 
+ </li> 
+ </ul> 
+ </li></ul> 
+
+
+<script>
+var toggler = document.getElementsByClassName("caret");
+var i;
+for (i = 0; i < toggler.length; i++) {
+    toggler[i].addEventListener("click", function() {
+    this.parentElement.querySelector(".nested").classList.toggle("active");
+    this.classList.toggle("caret-down");
+}
+)}
+</script>
+
+
+</body>
+</html>
