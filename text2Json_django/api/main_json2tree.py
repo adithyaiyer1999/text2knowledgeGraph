@@ -10,7 +10,6 @@ import yaml
 def generate(textInJSON, theme="1"):
     # this functions takes input json file and theme
     # then returns the html string to be written in files
-    
     json_data = yaml.safe_load(textInJSON)
     html_string = ''
     if(theme=='1'):
