@@ -5,7 +5,7 @@ import subprocess
 
 #prompt = "The user will provide a textual passage. Your task is to analyze the passage and respond with a JSON formatted structure that breaks down the passage into hierarchical ideas, similar to headings and subheadings in a document. For each identified section or idea, create a nested structure in JSON. Start with broader themes or main points as top-level elements, and break them down into finer details or sub-points. Ensure the JSON output clearly represents the hierarchy and organization of ideas in the passage, from the most general to the most specific." ## give your prompt here
 prompt = "You are a assigned a task to build a knowledge graph. Based on the text provided you have to create a JSON output such that key will represent all the significant elements of the text and values would represent the summary of key. Break down the values into more granular level information creating a tree or graph based hierarchy. Create a JSON representation for the same."
-api_key="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" ## give your api_key here
+api_key="open-ai-api-key" ## give your api_key here
 prompt_for_graph_update="You will be given two inputs following this command, first is the a json string and second is a paragraph to update in the json string. The json tree is a knowledge tree which puts the information in a form of heirarchial structure, making the information text into a granular level json representation. Your task is to take in the existing json text and append the new paragraph given into the form of json representation into the existing json. You cannot lose information of the old json. Following are the json and paragraph."
 
 
