@@ -12,6 +12,8 @@ python manage.py runserver
 
 ## Test API Calls based on this 
 
+To setup do : `OPENAI_API_KEY=sk-your-openai-key` on the terminal.
+
 There are roughly 2 base use case APIs this repo creates :
 
 1. Text -> Initial JSON -> HTML from JSON2Tree
