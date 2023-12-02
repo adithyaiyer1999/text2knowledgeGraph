@@ -9,18 +9,12 @@ function App() {
   const createJSON = async () => {
     const jsonOutput = JSON.stringify({ input1, input2 });
     console.log('Generated JSON:', jsonOutput);
-    var inputString = await postData(input1);
-    console.log('Posted input1:', inputString);
-    
-    fetch('output.html')
-      .then(response => response.text())
-      .then(data => {
-        setOutputHtml(data);
-        executeScriptFromHtml(data);
-      })
-      .catch(error => {
-        console.error('Error fetching output.html:', error);
-      });
+    var outputHTMLString = await postData(input1);
+    console.log('Posted input1:', outputHTMLString);
+
+    setOutputHtml(outputHTMLString);
+
+    executeScriptFromHtml(outputHTMLString);
   };
   useEffect(() => {
     if (outputHtml) {
@@ -39,6 +33,7 @@ function App() {
   };
 
   const postData = async (dataToSend) => {
+      console.log("Data reached in:", dataToSend)
   try {
     const response = await fetch('http://127.0.0.1:8000/api/create-graph-from-text/', {
       method: 'POST',
@@ -54,24 +49,15 @@ function App() {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    const data = await response.json();
-    console.log(data);
+    console.log('response:',response);
+    const data = await response.text();
+    console.log('data:',data);
     return data;
   } catch (error) {
     console.error('Error posting data:', error);
   }
 };
 
-  // return (
-  //   <div className="App">
-  //     <div className="leftPanel">
-  //       <textarea value={input1} onChange={(e) => setInput1(e.target.value)} />
-  //       <textarea value={input2} onChange={(e) => setInput2(e.target.value)} />
-  //       <button onClick={createJSON}>Create JSON!</button>
-  //     </div>
-  //     <div className="rightPanel" dangerouslySetInnerHTML={{ __html: outputHtml }} />
-  //   </div>
-  // );
   return (
     <div className="App">
         <h1 className="title">Graph Your Story</h1>

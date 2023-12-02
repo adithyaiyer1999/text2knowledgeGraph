@@ -2,6 +2,7 @@ from django.shortcuts import render
 import json
 # Create your views here.
 from django.http import JsonResponse
+from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from . import main_json2tree
@@ -32,7 +33,7 @@ def createGraphFromText(request):
     response_json = main_functions.createGraphFromText_(text)
     html_text = main_json2tree.generate(response_json)
     print("html_text: ", html_text)
-    return JsonResponse({'response': html_text})
+    return HttpResponse(html_text, content_type="text/html")
 
 @csrf_exempt
 @require_POST

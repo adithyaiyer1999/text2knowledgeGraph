@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&family=Oswald&display=swap"
+          rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,300&display=swap"
+                                 rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
+
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+
+
+    <style>
+        ul, #myUL {
+            list-style-type: none;
+        }
+        li {
+            padding-top: 5px;padding-bottom: 5px;
+        }
+        #myUL {
+            margin: 0;
+            padding: 0;
+        }
+        .caret {
+            cursor: pointer;
+            user-select: none;
+            font-family: 'Inconsolata', monospace;
+        }
+        .caret::before {
+            content: " \25B6";
+            display: inline-block;
+            margin-right: 6px;
+        }
+        .caret-down::before {
+            transform: rotate(90deg);
+        }
+        .nested {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .header {
+            text-align: left;
+            background: #f1f1f1;
+        }
+        .text-c {
+            color:green;
+            font-family:'Inconsolata',monospace;
+        }
+        .text-h {
+            font-family:'Inconsolata',monospace;
+        }
+    </style>
+
+
+</head>
+
+<body>
+<nav class="navbar sticky-top navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="https://raw.githubusercontent.com/abhaykatheria/json2tree/main/J2T.png" width="80" height="30" class="d-inline-block align-top" alt=""> JSON2tree
+    </a>
+</nav>
+
+<ul class ="myUL">
+    <li><span class="caret">REPORT</span>
+        <ul class ="nested">
+            <li><span class="caret">French Revolution : </span>
+                <ul class ="nested">
+                    <li><span class="text-h">Period : </span><span class="text-c">1789-1799</span></li>
+                    <li><span class="text-h">Significance : </span><span class="text-c">Period of political and societal change in France</span></li>
+                    <li><span class="caret">Key Events : </span>
+                        <ul class ="nested">
+                            <li><span class="text-h">Estates General (1789) : </span><span class="text-c">Beginning of the revolution</span></li>
+                            <li><span class="text-h">Coup of 18 Brumaire (1799) : </span><span class="text-c">End of the revolution, formation of the French Consulate</span></li>
+                            <li><span class="text-h">Storming of the Bastille (14 July) : </span><span class="text-c">Significant event, led to radical measures</span></li>
+                        </ul>
+                    </li>
+                    <li><span class="caret">Ideas : </span>
+                        <ul class ="nested">
+                            <li><span class="text-h">Fundamental Principles of Liberal Democracy : </span><span class="text-c">Many of its ideas are considered fundamental principles of liberal democracy</span></li>
+                            <li><span class="text-h">Values and Institutions : </span><span class="text-c">Values and institutions of the revolution remain central to modern French political discourse</span></li>
+                            <li><span class="text-h">Abolition of Feudalism : </span><span class="text-c">One of the radical measures adopted by the Assembly</span></li>
+                        </ul>
+                    </li>
+                    <li><span class="text-h">Causes : </span><span class="text-c">Combination of social, political and economic factors, failure of the Ancien Régime to manage them</span></li>
+                    <li><span class="caret">Actions : </span>
+                        <ul class ="nested">
+                            <li><span class="text-h">Convocation of the Estates General (1789) : </span><span class="text-c">Response to financial crisis and social distress</span></li>
+                            <li><span class="text-h">Formation of National Assembly (June 1789) : </span><span class="text-c">Transformation of the Estates General</span></li>
+                            <li><span class="text-h">Declaration of Rights : </span><span class="text-c">One of the radical measures adopted by the Assembly</span></li>
+                        </ul>
+                    </li>
+                    <li><span class="text-h">Struggle for Political Control : </span><span class="text-c">Dominant theme for the next three years, exacerbated by economic depression</span></li>
+                </ul>
+            </li>
+        </ul>
+    </li></ul>
+
+
+<script>
+    var toggler = document.getElementsByClassName("caret");
+    var i;
+    for (i = 0; i < toggler.length; i++) {
+        toggler[i].addEventListener("click", function() {
+                this.parentElement.querySelector(".nested").classList.toggle("active");
+                this.classList.toggle("caret-down");
+            }
+        )}
+</script>
+
+
+</body>
+</html>
