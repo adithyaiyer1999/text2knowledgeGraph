@@ -19,11 +19,10 @@ def generate(textInJSON, theme="1"):
         html_string = html_2.create_html_report(json_data)
     else:
         html_string = html_1.create_html_report(json_data)
-    print("inside the part I want to debug:",html_string)
+    # Replacing the logo path with our logo
     pattern = r'https://raw\.githubusercontent\.com/abhaykatheria/json2tree/main/J2T\.png'
     replacement = './images/knowledgegraph.png'
     html_string = re.sub(pattern, replacement, html_string)
-#     html_string.replace('https://raw.githubusercontent.com/abhaykatheria/json2tree/main/J2T.png','./images/knowledgegraph.png')
     return html_string
 
 def create_output_file(output_file_path, html_string):

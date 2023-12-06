@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-// import loadingAnimationStyles from './buffer_loading.css'; // Import CSS for loading animation
-// import loadingAnimationHtml from './buffer_loading.html'; // Import HTML for loading animation
 import './buffer_loading.css'
 
 
@@ -18,7 +16,6 @@ function App() {
     console.log('Generated JSON:', jsonOutput);
     var outputHTMLString = await postData(input1);
     console.log('Posted input1:', outputHTMLString);
-    // outputHTMLString.replace('https://raw.githubusercontent.com/abhaykatheria/json2tree/main/J2T.png','./images/knowledgegraph.png')
     setOutputHtml(outputHTMLString);
 
     executeScriptFromHtml(outputHTMLString);
@@ -67,7 +64,6 @@ function App() {
 };
 let rightPanelContent;
 if (isLoading) {
-    // rightPanelContent = <div dangerouslySetInnerHTML={{ __html: loadingAnimationHtml }} />;
     rightPanelContent = (
         <div className='container'>
             <div className='loader'>
@@ -97,7 +93,6 @@ if (isLoading) {
                 <textarea className="inputArea" value={input2} onChange={(e) => setInput2(e.target.value)} />
                 <button className="jsonButton_update" onClick={createJSON}>Add text to Graph</button>
             </div>
-            {/*<div className="rightPanel" dangerouslySetInnerHTML={{ __html: outputHtml }} />*/}
             <div className="rightPanel">
                 {rightPanelContent}
             </div>
