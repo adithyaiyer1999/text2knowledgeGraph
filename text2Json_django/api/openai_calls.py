@@ -25,7 +25,7 @@ def ask_chatgpt(prompt, model="gpt-3.5-turbo", max_tokens=100):
         response = client.chat.completions.create(
         messages=[
             {"role": "system",
-             "content": "You are a helpful assistant."},
+             "content": "You are a helpful assistant."}, #play around with this
             {
                 "role": "user",
                 "content": prompt,
