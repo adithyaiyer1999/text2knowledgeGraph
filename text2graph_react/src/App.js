@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import './buffer_loading.css'
+
 
 function App() {
   const [input1, setInput1] = useState('');
   const [input2, setInput2] = useState('');
   const [outputHtml, setOutputHtml] = useState('');
+  const [isLoading, setIsLoading] = useState(false); // New loading state
 
-  const createJSON = async () => {
+
+    const createJSON = async () => {
+    setIsLoading(true);
     const jsonOutput = JSON.stringify({ input1, input2 });
     console.log('Generated JSON:', jsonOutput);
     var outputHTMLString = await postData(input1);
     console.log('Posted input1:', outputHTMLString);
-
     setOutputHtml(outputHTMLString);
 
     executeScriptFromHtml(outputHTMLString);
@@ -52,11 +56,30 @@ function App() {
     console.log('response:',response);
     const data = await response.text();
     console.log('data:',data);
+    setIsLoading(false);
     return data;
   } catch (error) {
     console.error('Error posting data:', error);
   }
 };
+let rightPanelContent;
+if (isLoading) {
+    rightPanelContent = (
+        <div className='container'>
+            <div className='loader'>
+                <div className='loader--dot'></div>
+                <div className='loader--dot'></div>
+                <div className='loader--dot'></div>
+                <div className='loader--dot'></div>
+                <div className='loader--dot'></div>
+                <div className='loader--dot'></div>
+                <div className='loader--text'></div>
+            </div>
+        </div>
+    );
+} else {
+    rightPanelContent = <div dangerouslySetInnerHTML={{ __html: outputHtml }} />;
+}
 
   return (
     <div className="App">
@@ -70,7 +93,9 @@ function App() {
                 <textarea className="inputArea" value={input2} onChange={(e) => setInput2(e.target.value)} />
                 <button className="jsonButton_update" onClick={createJSON}>Add text to Graph</button>
             </div>
-            <div className="rightPanel" dangerouslySetInnerHTML={{ __html: outputHtml }} />
+            <div className="rightPanel">
+                {rightPanelContent}
+            </div>
         </div>
     </div>
 );

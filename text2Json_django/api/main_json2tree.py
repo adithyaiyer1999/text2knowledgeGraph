@@ -6,6 +6,7 @@ from .theme_1 import html as html_1
 from .theme_2 import html as html_2
 import json
 import yaml
+import re
 
 def generate(textInJSON, theme="1"):
     # this functions takes input json file and theme
@@ -18,6 +19,10 @@ def generate(textInJSON, theme="1"):
         html_string = html_2.create_html_report(json_data)
     else:
         html_string = html_1.create_html_report(json_data)
+    # Replacing the logo path with our logo
+    pattern = r'https://raw\.githubusercontent\.com/abhaykatheria/json2tree/main/J2T\.png'
+    replacement = './images/knowledgegraph.png'
+    html_string = re.sub(pattern, replacement, html_string)
     return html_string
 
 def create_output_file(output_file_path, html_string):
