@@ -117,7 +117,7 @@ def report_dict_to_html(dict_obj):
     html_string = ''
     html_string = html_string + '<ul class ="myUL"> \n'
     html_string = html_string + \
-        '<li><span class="caret">REPORT</span> \n'
+        '<li><span class="caret">Summary</span> \n'
     html_string = html_string + dict_handler(dict_obj, 0)
     html_string = html_string + '</li></ul> \n'
     return html_string
