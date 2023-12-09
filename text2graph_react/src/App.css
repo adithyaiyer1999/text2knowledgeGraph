@@ -45,6 +45,17 @@
   align-items: center;
   cursor: pointer;
 }
+.resetButton {
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 1em;
+  color: white;
+  background-color: #8cc759;
+  border: none;
+  border-radius: 5px;
+  align-items: center;
+  cursor: pointer;
+}
 
 .jsonButton_update {
   width: 100%;
