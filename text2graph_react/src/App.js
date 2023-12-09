@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import './buffer_loading.css'
 
-
 function App() {
   const [input1, setInput1] = useState('');
   const [input2, setInput2] = useState('');
@@ -10,6 +9,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false); // New loading state
   const [isGraphRendered, setIsGraphRendered] = useState(false);
   const [fileName, setFileName] = useState("");
+  
   // Load data from txt
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -28,7 +28,12 @@ function App() {
         setIsLoading(true);
         const jsonOutput = JSON.stringify({ input1, input2 });
         console.log('Generated JSON:', jsonOutput);
-        var outputHTMLString = await postData(input1);
+        try{
+          var outputHTMLString = await postData(input1);
+        } catch (error) {
+          console.error('Error posting data:', error);
+        }
+        
         console.log('Posted input1:', outputHTMLString);
         setOutputHtml(outputHTMLString);
 
@@ -111,6 +116,8 @@ function App() {
     console.error('Error posting data:', error);
   }
 };
+
+
 
   // API call to update data
   const updateData = async (dataToSend) => {
