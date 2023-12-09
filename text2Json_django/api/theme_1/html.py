@@ -3,62 +3,112 @@ from .js import js
 from .css import css
 
 
+# def list_handler(list_obj, indent):
+#     '''Write html code for lists in report dictionary'''
+#     html_string = ''
+#     for i, _ in enumerate(list_obj):
+#         if isinstance(list_obj[i], dict):
+#             if "name" in list_obj[i].keys():
+#                 html_string = html_string + '  '*indent + \
+#                     '<li><span class="caret">' + str(list_obj[i]["name"]) + \
+#                     ' : ' + '</span> \n '
+#             else:
+#                 html_string = html_string + '  '*indent + \
+#                     '<li><span class="caret">' + str(i) + ' : ' + '</span> \n '
+#             html_string = html_string + dict_handler(list_obj[i], indent+1)
+#             html_string = html_string + '  '*indent + '</li> \n '
+#         elif isinstance(list_obj[i], list):
+#             html_string = html_string + '  '*indent + \
+#                 '<li><span class="caret">' + str(i) + ' : ' + '</span> \n '
+#             html_string = html_string + '  '*indent + \
+#                 '<ul class ="nested"> \n '
+#             html_string = html_string + list_handler(list_obj[i], indent+1)
+#             html_string = html_string + '  '*indent + '</ul> \n ' + \
+#                 '  '*indent + '</li>\n '
+#         else:
+#             html_string = html_string + ' '*indent + '<li>' + \
+#                 '<span class="text-c">' + str(list_obj[i]) + \
+#                 '</span>\n</li> \n '
+#     return html_string
+#
+# # pylint: disable=too-many-branches
+# def dict_handler(dict_obj, indent):
+#     '''Writes html code for dictionary in report dictionary'''
+#     html_string = ''
+#     html_string = html_string + '  '*indent + '<ul class ="nested"> \n'
+#     for k, v in dict_obj.items():
+#         if isinstance(v, dict):
+#             if "name" in v.keys():
+#                 html_string = html_string + '  '*indent + \
+#                     '<li><span class="caret">' + str(v["name"]) + ' : ' + \
+#                     '</span> \n '
+#             else:
+#                 html_string = html_string + '  '*indent + \
+#                     '<li><span class="caret">' + str(k) + ' : ' + '</span> \n '
+#             html_string = html_string + dict_handler(v, indent+1) + \
+#                 '  '*indent + '</li> \n '
+#         elif isinstance(v, list):
+#             html_string = html_string + '  '*indent + \
+#                 '<li><span class="caret">' + str(k) + ' : ' + \
+#                 '[%d]' % (len(v)) + '</span> \n '
+#             html_string = html_string + '  '*indent + \
+#                 '<ul class ="nested"> \n ' + list_handler(v, indent+1) + \
+#                 '  '*indent + '</ul> \n ' + '  '*indent + '</li> \n '
+#         else:
+#             html_string = html_string + ' '*indent + \
+#                 '<li><span class="text-h">' + str(k) + ' : ' + \
+#                 '</span><span class="text-c">' + str(v) + '</span></li>\n'
+#     html_string = html_string + '  '*indent + '</ul> \n '
+#     return html_string
+
 def list_handler(list_obj, indent):
     '''Write html code for lists in report dictionary'''
     html_string = ''
     for i, _ in enumerate(list_obj):
+        color_style = f" style='color: {list_obj[i]['color']}'" if 'color' in list_obj[i] else ''
         if isinstance(list_obj[i], dict):
             if "name" in list_obj[i].keys():
-                html_string = html_string + '  '*indent + \
-                    '<li><span class="caret">' + str(list_obj[i]["name"]) + \
-                    ' : ' + '</span> \n '
+                html_string += '  ' * indent + \
+                    f'<li><span class="caret"{color_style}>' + str(list_obj[i]["name"]) + ' : </span>\n'
             else:
-                html_string = html_string + '  '*indent + \
-                    '<li><span class="caret">' + str(i) + ' : ' + '</span> \n '
-            html_string = html_string + dict_handler(list_obj[i], indent+1)
-            html_string = html_string + '  '*indent + '</li> \n '
+                html_string += '  ' * indent + \
+                    f'<li><span class="caret"{color_style}>' + str(i) + ' : </span>\n'
+            html_string += dict_handler(list_obj[i], indent + 1)
+            html_string += '  ' * indent + '</li>\n'
         elif isinstance(list_obj[i], list):
-            html_string = html_string + '  '*indent + \
-                '<li><span class="caret">' + str(i) + ' : ' + '</span> \n '
-            html_string = html_string + '  '*indent + \
-                '<ul class ="nested"> \n '
-            html_string = html_string + list_handler(list_obj[i], indent+1)
-            html_string = html_string + '  '*indent + '</ul> \n ' + \
-                '  '*indent + '</li>\n '
+            html_string += '  ' * indent + \
+                f'<li><span class="caret"{color_style}>' + str(i) + ' : </span>\n'
+            html_string += '  ' * indent + '<ul class ="nested">\n'
+            html_string += list_handler(list_obj[i], indent + 1)
+            html_string += '  ' * indent + '</ul>\n' + '  ' * indent + '</li>\n'
         else:
-            html_string = html_string + ' '*indent + '<li>' + \
-                '<span class="text-c">' + str(list_obj[i]) + \
-                '</span>\n</li> \n '
+            html_string += ' ' * indent + '<li>' + \
+                f'<span class="text-c"{color_style}>' + str(list_obj[i]) + '</span>\n</li>\n'
     return html_string
 
-# pylint: disable=too-many-branches
 def dict_handler(dict_obj, indent):
     '''Writes html code for dictionary in report dictionary'''
     html_string = ''
-    html_string = html_string + '  '*indent + '<ul class ="nested"> \n'
+    html_string += '  ' * indent + '<ul class ="nested">\n'
     for k, v in dict_obj.items():
+        color_style = f" style='color: {v['color']}'" if isinstance(v, dict) and 'color' in v else ''
         if isinstance(v, dict):
             if "name" in v.keys():
-                html_string = html_string + '  '*indent + \
-                    '<li><span class="caret">' + str(v["name"]) + ' : ' + \
-                    '</span> \n '
+                html_string += '  ' * indent + \
+                    f'<li><span class="caret"{color_style}>' + str(v["name"]) + ' : </span>\n'
             else:
-                html_string = html_string + '  '*indent + \
-                    '<li><span class="caret">' + str(k) + ' : ' + '</span> \n '
-            html_string = html_string + dict_handler(v, indent+1) + \
-                '  '*indent + '</li> \n '
+                html_string += '  ' * indent + \
+                    f'<li><span class="caret"{color_style}>' + str(k) + ' : </span>\n'
+            html_string += dict_handler(v, indent + 1) + '  ' * indent + '</li>\n'
         elif isinstance(v, list):
-            html_string = html_string + '  '*indent + \
-                '<li><span class="caret">' + str(k) + ' : ' + \
-                '[%d]' % (len(v)) + '</span> \n '
-            html_string = html_string + '  '*indent + \
-                '<ul class ="nested"> \n ' + list_handler(v, indent+1) + \
-                '  '*indent + '</ul> \n ' + '  '*indent + '</li> \n '
+            html_string += '  ' * indent + \
+                f'<li><span class="caret"{color_style}>' + str(k) + ' : [%d]</span>\n' % (len(v))
+            html_string += '  ' * indent + '<ul class ="nested">\n' + list_handler(v, indent + 1) + \
+                '  ' * indent + '</ul>\n' + '  ' * indent + '</li>\n'
         else:
-            html_string = html_string + ' '*indent + \
-                '<li><span class="text-h">' + str(k) + ' : ' + \
-                '</span><span class="text-c">' + str(v) + '</span></li>\n'
-    html_string = html_string + '  '*indent + '</ul> \n '
+            html_string += ' ' * indent + \
+                f'<li><span class="text-h"{color_style}>' + str(k) + ' : </span><span class="text-c">' + str(v) + '</span></li>\n'
+    html_string += '  ' * indent + '</ul>\n'
     return html_string
 
 

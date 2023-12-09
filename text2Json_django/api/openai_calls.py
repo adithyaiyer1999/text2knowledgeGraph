@@ -33,8 +33,7 @@ def ask_chatgpt(prompt, model="gpt-3.5-turbo", max_tokens=100):
         ],
         model=model,
     )
-        dictionary = yaml.safe_load(response.choices[0].message.content)
-        return str(dictionary)
+        return str(response.choices[0].message.content)
     except Exception as e:
         return str(e)
 
