@@ -15,7 +15,7 @@ def createGraphFromText_(text):
     return str_response
 
 def addToGraphFromText_(text, json_text):
-    model = "gpt-4-1106-preview"
+    model = "gpt-3.5-turbo"
     query_prompt = prompts.UPDATE_JSON_PROMPTS[model]
     prompt = query_prompt + "\n\n Paragraph : " + text + "\n\nJSON: " + json_text + " \n\nUpdated JSON:"
     response = openai_calls.ask_chatgpt(prompt, model)
