@@ -1,5 +1,7 @@
 from . import openai_calls 
 from . import prompts
+from . import main_chunking_and_multithreading
+from . import constants
 import json
 
 def createGraphFromText_(text):
@@ -90,6 +92,36 @@ def getNextNodeFromOpenAI(current_node,children_nodes, query):
 
 def sepearateListWithCommas(list):
     return ', '.join(list)
+
+def createGraphFromTextIteratively_(text):
+
+    model = "gpt-4-1106-preview"
+    query_prompt = prompts.CREATE_HIGH_DETAIL_JSON_PROMPTS[model]
+    list_of_chunks = []
+    # This function will create list of chunks, P.S. the chunks would be created based on max_token_length provided
+    list_of_chunks = main_chunking_and_multithreading.chunk_text(text,constants.MAX_TOKEN_LENGTH)
+    # This function will create list of JSON summaries, the function will call open ai api in multithreaded fashion
+    list_of_json_summaries=main_chunking_and_multithreading.multithreaded_summarized_json(list_of_chunks,model,query_prompt)
+
+    # Since our JSONs would have '\n', we need a different separator to identify jsons (list of json -> string)
+    separator = "|||"
+
+    # Combine JSON strings using the separator
+    combined_json = separator.join(list_of_json_summaries)
+
+    query_prompt = prompts.COMBINE_JSON_SUMMARIES[model]
+    prompt = query_prompt + "\n\n LIST of JSON: " + combined_json + "\n\nMERGED JSON:"
+    response = openai_calls.ask_chatgpt(prompt, model)
+
+    str_response = str(response)
+
+    # Some sanity text cleaning to avoid errors in yaml loading
+    str_response = str_response.replace("json", "")
+    str_response = str_response.replace("`", "")
+
+#     print(list_of_json_summaries)
+    return str_response
+
 
 
 
