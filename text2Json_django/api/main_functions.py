@@ -7,7 +7,6 @@ def createGraphFromText_(text):
     query_prompt = prompts.CREATE_HIGH_DETAIL_JSON_PROMPTS[model]
     prompt = query_prompt + "\n\n Text: " + text + "\n\nJSON:"
     response = openai_calls.ask_chatgpt(prompt, model)
-
     str_response = str(response)
     
     # Some sanity text cleaning to avoid errors in yaml loading

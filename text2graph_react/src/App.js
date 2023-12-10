@@ -11,6 +11,7 @@ function App() {
   const [fileName, setFileName] = useState("");
   const [searchText, setSearchText] = useState("");
   const [bigGraph, setbigGraph] = useState("{}");
+  const [pdfFile, setPdfFile] = useState(null);
   
 
   // Load data from txt
@@ -204,6 +205,28 @@ function App() {
       }
   };
 
+  const sendPdfFileToBackend = async (e) => {
+    setIsLoading(true);
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('file', pdfFile);
+    const response = await fetch('http://127.0.0.1:8000/api/create-graph-from-pdf/', {
+      method: 'POST',
+      body: formData,
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    console.log('response:',response);
+    const data = await response.text();
+    setIsLoading(false);
+    console.log('data:',data);
+    setOutputHtml(data);
+    executeScriptFromHtml(data);
+    setIsGraphRendered(true);
+  };
+  
+  
   
 let rightPanelContent;
 if (isLoading) {
@@ -233,6 +256,11 @@ if (isLoading) {
                 <textarea className="inputArea" value={input1} onChange={(e) => setInput1(e.target.value)} />
                 <label htmlFor="file-upload" className="custom-file-upload">Upload from text File</label>
                 <input id="file-upload" type="file" accept=".txt" onChange={handleFileChange} style={{ display: 'none' }} />
+              <form onSubmit={sendPdfFileToBackend}>
+              <input type="file" onChange={(e) => setPdfFile(e.target.files[0])} />
+              <button className="pdfButton">Render Graph From Pdf</button>
+              </form>
+
                 {fileName && <span className="file-name">{fileName}</span>}
                 {!isGraphRendered && (
                     <button className="jsonButton" onClick={createJSON}>Render Graph</button>
