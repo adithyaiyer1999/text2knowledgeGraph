@@ -86,3 +86,18 @@
   font-size: 1.1em;
   color: #333;
 }
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease;
+}
+
+.custom-file-upload:hover {
+  background-color: #45a049;
+}

@@ -33,6 +33,7 @@ def createGraphFromText(request):
     text = data.get('text', '')
     response_json = main_functions.createGraphFromText_(text)
     request.session['response_json'] = response_json
+    print("response_json = ",response_json)
     print("request.session:",request.session)
     html_text = main_json2tree.generate(response_json)
     print("html_text: ", html_text)
