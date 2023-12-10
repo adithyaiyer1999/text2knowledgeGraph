@@ -45,6 +45,19 @@
   align-items: center;
   cursor: pointer;
 }
+
+.pdfButton {
+  width: 100%;
+  padding: 10px 10px;
+  font-size: 1em;
+  color: white;
+  background-color: rgb(8, 142, 77);
+  border: none;
+  border-radius: 1px;
+  align-items: center;
+  cursor: pointer;
+}
+
 .resetButton {
   width: 100%;
   padding: 10px 20px;

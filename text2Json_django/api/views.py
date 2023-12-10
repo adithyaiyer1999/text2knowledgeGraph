@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from . import main_json2tree
+from PyPDF2 import PdfReader
 import requests
 # import main_functions
 from . import main_functions
@@ -35,6 +36,24 @@ def createGraphFromText(request):
     request.session['response_json'] = response_json
     print("response_json = ",response_json)
     print("request.session:",request.session)
+    html_text = main_json2tree.generate(response_json)
+    print("html_text: ", html_text)
+    request.session.save()
+    return HttpResponse(html_text, content_type="text/html")
+
+@csrf_exempt
+@require_POST
+def createGraphFromPdf(request):
+    # First let's create a text file from the pdf
+    file = request.FILES.get('file')
+    reader = PdfReader(file)
+    text = ""
+    for page in reader.pages:
+        text += page.extract_text() + "\n"
+
+    # Now let's call the createGraphFromText function
+    response_json = main_functions.createGraphFromText_(text)
+    request.session['response_json'] = response_json
     html_text = main_json2tree.generate(response_json)
     print("html_text: ", html_text)
     request.session.save()
