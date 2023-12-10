@@ -14,3 +14,40 @@ UPDATE_JSON_PROMPTS = {
    "gpt-4-1106-preview": "The user will provide a JSON string, which contains the current summary in a JSON tree format. The user will then provide a field Text, which shall be used to update the graph based on this new information. You must understand the Text To Be Added, and update the JSON format provided with this new information. You can either add a new node, or modify existing JSON nodes. Your task is to take in the existing json text and append the new paragraph given into the form of json representation into the existing json. You must lose minimal information of the old json. Return ONLY in JSON format. Nothing else..",
     # Add more prompts as needed
 }
+
+TRAVERSE_GRAPH_PROMPTS = {
+    "gpt-4-1106-preview" : '''You are a machine which will assist in graph traversal. You will be given
+1. A query, which is looking for the node which is most relevant to the query
+2. Current Node : the current node description
+3. Children Nodes : all the descriptions of the children nodes of the current node
+
+You are required to answer the following 2 questions :
+
+1. Is the current node more relevant than any of the children nodes : the answer is "Yes" or "No". Only output "No" if a child node is clearly more relevant to the query. Say "Yes" in cases where the query is more general, and the current node is a good way to summarize the query.
+
+2. Which is the children nodes is most relevant : The answer is the exact text of the children nodes
+
+Your output should be in the form of a JSON, such as 
+
+Sample Query 1: How much sugar should I add while baking cake?
+Sample Node 1: Cooking Techniques
+Sample Children Nodes :1 Frying Techniques, Baking Techniques",  Chopping Techniques
+
+Sample Answer 1: {"IsCurrentNodeMostRelevant":"No" , "MostRelevantChildNode":"Baking Techniques"}
+
+Sample Query 2: What was the effect on french economy
+Sample Node 2: Economic Crises
+Sample Children Nodes : Bread Shortage, No homes, High taxation , High inflation
+
+Sample Answer 2: {"IsCurrentNodeMostRelevant":"Yes" , "MostRelevantChildNode":"High inflation"}
+
+Only output the JSON, no other information. The "IsCurrentNodeMostRelevant" must only be "Yes" or "No", and the "MostRelevantChildNode" must have the exact text from the Sample Children Nodes.
+
+Sample Query 3: How to properly mix flour and water
+Sample Node 3: Ingredients
+Sample Children Nodes : Dough, Toppings
+
+Sample Answer 3 :{"IsCurrentNodeMostRelevant":"No", "MostRelevantChildNode":"Dough"} 
+
+'''
+}

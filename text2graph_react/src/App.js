@@ -9,7 +9,10 @@ function App() {
   const [isLoading, setIsLoading] = useState(false); // New loading state
   const [isGraphRendered, setIsGraphRendered] = useState(false);
   const [fileName, setFileName] = useState("");
+  const [searchText, setSearchText] = useState("");
+  const [bigGraph, setbigGraph] = useState("{}");
   
+
   // Load data from txt
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -25,24 +28,31 @@ function App() {
 
     // Create JSON format
     const createJSON = async () => {
-        setIsLoading(true);
-        const jsonOutput = JSON.stringify({ input1, input2 });
-        console.log('Generated JSON:', jsonOutput);
-        try{
-          var outputHTMLString = await postData(input1);
-        } catch (error) {
-          console.error('Error posting data:', error);
-        }
-        
-        console.log('Posted input1:', outputHTMLString);
-        setOutputHtml(outputHTMLString);
+      setIsLoading(true);
+      const jsonOutput = JSON.stringify({ input1, input2 });
+      console.log('Generated JSON:', jsonOutput);
+      try{
+        var outputHTMLString = await postData(input1);
+      } catch (error) {
+        console.error('Error posting data:', error);
+      }
+      
+      console.log('Posted input1:', outputHTMLString);
+      setOutputHtml(outputHTMLString);
 
-        executeScriptFromHtml(outputHTMLString);
+      executeScriptFromHtml(outputHTMLString);
 
-        // Add this line to reset the input1 state
-        setIsGraphRendered(true);
-        // setInput1(''); // This will clear the text in the textbox # Adi - We don't wanna do this? Makes it visaually unappealing
-    };
+      // Add this line to reset the input1 state
+      setIsGraphRendered(true);
+      // setInput1(''); // This will clear the text in the textbox # Adi - We don't wanna do this? Makes it visaually unappealing
+  };
+
+  const reload = async () => {
+    setOutputHtml(bigGraph);
+    executeScriptFromHtml(bigGraph);
+
+    // setInput1(''); // This will clear the text in the textbox # Adi - We don't wanna do this? Makes it visaually unappealing
+};
 
     // Update the JSON format
     const updateJSON = async () => {
@@ -59,6 +69,22 @@ function App() {
         setIsGraphRendered(true);
         // setInput1(''); // This will clear the text in the textbox, # Adi - lets not do this
     };
+
+    // Search the JSON format
+    // Update the JSON format
+    const searchJSON = async () => {
+      setIsLoading(true);
+
+      var outputHTMLString = await searchData(searchText);
+      console.log('Returned data post search', outputHTMLString);
+      setOutputHtml(outputHTMLString);
+
+      executeScriptFromHtml(outputHTMLString);
+
+      // Add this line to reset the input1 state
+      setIsGraphRendered(true);
+      // setInput1(''); // This will clear the text in the textbox, # Adi - lets not do this
+  };
     
     // Use the javascript to build bueatiful visualizations
   useEffect(() => {
@@ -109,6 +135,7 @@ function App() {
 
     console.log('response:',response);
     const data = await response.text();
+    setbigGraph(data);
     console.log('data:',data);
     setIsLoading(false);
     return data;
@@ -116,8 +143,6 @@ function App() {
     console.error('Error posting data:', error);
   }
 };
-
-
 
   // API call to update data
   const updateData = async (dataToSend) => {
@@ -140,6 +165,8 @@ function App() {
 
             console.log('response:',response);
             const data = await response.text();
+            
+            setbigGraph(data);
             console.log('data:',data);
             setIsLoading(false);
             return data;
@@ -147,6 +174,37 @@ function App() {
             console.error('Error posting data:', error);
         }
     };
+
+  // API call to search graph
+  const searchData = async (dataToSend) => {
+      console.log("Data reached in:", dataToSend)
+      try {
+          const response = await fetch('http://127.0.0.1:8000/api/search-graph-from-text/', {
+              method: 'POST',
+              credentials: 'include',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                  text : dataToSend
+              }),
+          });
+
+          if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+
+          console.log('response:',response);
+          const data = await response.text();
+          console.log('data:',data);
+          setIsLoading(false);
+          return data;
+      } catch (error) {
+          console.error('Error posting data:', error);
+      }
+  };
+
+  
 let rightPanelContent;
 if (isLoading) {
     rightPanelContent = (
@@ -188,6 +246,17 @@ if (isLoading) {
                 )}
             </div>
             <div className="rightPanel">
+            <div className="searchBar">
+        <input
+          className="searchInput"
+          type="text"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          placeholder="Search..."
+        />
+    <button className="searchButton" onClick={() => searchJSON(searchText)}>Search</button>
+    <button className="reloadButton" onClick={() => reload()}>Reload main graph</button>
+</div>
                 {rightPanelContent}
             </div>
         </div>
