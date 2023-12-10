@@ -101,3 +101,55 @@
 .custom-file-upload:hover {
   background-color: #45a049;
 }
+
+.searchBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.searchInput {
+  width: 200px;
+  padding: 10px;
+  border: 2px solid #007bff;
+  border-right: none; /* Optional: if you want the button to seamlessly integrate with the input */
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.searchInput:focus {
+  opacity: 1;
+}
+
+.searchButton {
+  padding: 10px 20px;
+  border: 2px solid #007bff;
+  background-color: #007bff;
+  color: white;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.searchButton:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.reloadButton {
+  padding: 10px 20px;
+  border: 1px solid #030303;
+  background-color: #024a27;
+  color: white;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.reloadButton:hover {
+  background-color: #00b377;
+  transform: scale(1.05);
+}
