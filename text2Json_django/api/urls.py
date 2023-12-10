@@ -6,4 +6,5 @@ urlpatterns = [
     path('call-openai/', views.callOpenAI, name='call-openai'),
     path('create-graph-from-text/', views.createGraphFromText, name='create-graph-from-text'),
     path('add-to-graph-from-text/', views.addToGraphFromText, name='add-to-graph-from-text'),
+    path('search-graph-from-text/', views.searchGraphFromText, name='search-graph-from-text'),
 ]

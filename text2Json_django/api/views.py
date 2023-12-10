@@ -56,3 +56,19 @@ def addToGraphFromText(request):
     else:
          # Handle the case where response_json is not in session
         return JsonResponse({'error': 'Previous graph data not found'})
+    
+@csrf_exempt
+@require_POST
+def searchGraphFromText(request):
+    data = json.loads(request.body)
+    text = data.get('text', '')
+    response_json = request.session.get('response_json')
+    if response_json is not None:
+        response_json_smol = main_functions.searchGraphFromText_(text, response_json)
+        # changed_color_updated_json=main_graphmanipulations.find_difference_change_color(response_json,updated_response_json)
+        html_text = main_json2tree.generate(str(response_json_smol))
+        request.session['response_json_smol'] = response_json_smol
+        return HttpResponse(html_text, content_type="text/html")
+    else:
+         # Handle the case where response_json is not in session
+        return JsonResponse({'error': 'Previous graph data not found'})
