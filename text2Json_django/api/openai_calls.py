@@ -1,6 +1,13 @@
 import os
 from openai import OpenAI
+import openai
 import yaml
+
+# '''
+#     This function returns how many tokens are calculated by openai's tokenizer
+# '''
+# def calculate_openai_token_length(text):
+#     return len(openai.Tokenizer().encode(text))
 
 def setup_openai_api():
     """
