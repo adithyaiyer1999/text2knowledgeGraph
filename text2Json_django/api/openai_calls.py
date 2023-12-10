@@ -42,6 +42,8 @@ def ask_chatgpt(prompt, model="gpt-3.5-turbo", max_tokens=100):
     )
         return str(response.choices[0].message.content)
     except Exception as e:
+        print("I am inside the openai exception")
+        print(str(e))
         return str(e)
 
 # # Example usage
