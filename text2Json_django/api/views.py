@@ -58,6 +58,8 @@ def createGraphFromPdf(request):
     for page in reader.pages:
         text += page.extract_text() + "\n"
 
+    print(text)
+
     # Now let's call the createGraphFromText function
     response_json = main_functions.createGraphFromText_(text)
     request.session['response_json'] = response_json

@@ -12,20 +12,35 @@ function App() {
   const [searchText, setSearchText] = useState("");
   const [bigGraph, setbigGraph] = useState("{}");
   const [pdfFile, setPdfFile] = useState(null);
-  
 
-  // Load data from txt
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
+    const handleRenderGraph = () => {
+        if (pdfFile) {
+            sendPdfFileToBackend();  // Function to handle PDF file upload
+        } else {
+            createJSON();  // Function to process text input
+        }
+    };
+
+const handleFileChange = (e) => {
+    const file = e.target.files[0];
     if (file) {
-      setFileName(file.name);
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setInput1(e.target.result);
-      };
-      reader.readAsText(file);
+        const fileType = file.name.split('.').pop();
+
+        if (fileType === 'txt') {
+            setFileName(file.name);
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                setInput1(e.target.result);
+            };
+            reader.readAsText(file);
+
+        } else if (fileType === 'pdf') {
+            // Handle pdf file (e.g., set state for PDF file)
+            setFileName(file.name);
+            setPdfFile(file);
+        }
     }
-  };
+};
 
     // Create JSON format
     const createJSON = async () => {
@@ -206,14 +221,13 @@ function App() {
   };
 
   const sendPdfFileToBackend = async (e) => {
-    setIsLoading(true);
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append('file', pdfFile);
-    const response = await fetch('http://127.0.0.1:8000/api/create-graph-from-pdf/', {
-      method: 'POST',
-      body: formData,
-    });
+      setIsLoading(true);
+      const formData = new FormData();
+      formData.append('file', pdfFile);
+      const response = await fetch('http://127.0.0.1:8000/api/create-graph-from-pdf/', {
+          method: 'POST',
+          body: formData,
+      });
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
@@ -252,18 +266,23 @@ if (isLoading) {
         <h1 className="title">Graph Your Story</h1>
         <div className="content">
             <div className="leftPanel">
-                <label className="textLabel">Base Text</label>
+                <label className="textLabel">Enter Your Text</label>
                 <textarea className="inputArea" value={input1} onChange={(e) => setInput1(e.target.value)} />
-                <label htmlFor="file-upload" className="custom-file-upload">Upload from text File</label>
-                <input id="file-upload" type="file" accept=".txt" onChange={handleFileChange} style={{ display: 'none' }} />
-              <form onSubmit={sendPdfFileToBackend}>
-              <input type="file" onChange={(e) => setPdfFile(e.target.files[0])} />
-              <button className="pdfButton">Render Graph From Pdf</button>
-              </form>
+
+                {!isGraphRendered && (
+                    <div className="orSeparator">OR</div>
+                )}
+                {!isGraphRendered && (
+                    <label htmlFor="file-upload" className="custom-file-upload">Upload PDF or TXT File</label>
+                )}
+                {!isGraphRendered && (
+                    <input id="file-upload" type="file" accept=".txt, .pdf" onChange={handleFileChange} style={{ display: 'none' }} />
+
+            )}
 
                 {fileName && <span className="file-name">{fileName}</span>}
                 {!isGraphRendered && (
-                    <button className="jsonButton" onClick={createJSON}>Render Graph</button>
+                    <button className="jsonButton" onClick={handleRenderGraph}>Render Graph</button>
                 )}
                 {isGraphRendered && (
                     <button className="jsonButton" onClick={updateJSON}>Update Graph</button>
