@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&family=Oswald&display=swap"
+          rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,300&display=swap"
+                                 rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
+
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+
+
+    <style>
+        ul, #myUL {
+            list-style-type: none;
+        }
+        li {
+            padding-top: 5px;padding-bottom: 5px;
+        }
+        #myUL {
+            margin: 0;
+            padding: 0;
+        }
+        .caret {
+            cursor: pointer;
+            user-select: none;
+            font-family: 'Inconsolata', monospace;
+        }
+        .caret::before {
+            content: " \25B6";
+            display: inline-block;
+            margin-right: 6px;
+        }
+        .caret-down::before {
+            transform: rotate(90deg);
+        }
+        .nested {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .header {
+            text-align: left;
+            background: #f1f1f1;
+        }
+        .text-c {
+            color:green;
+            font-family:'Inconsolata',monospace;
+        }
+        .text-h {
+            font-family:'Inconsolata',monospace;
+        }
+    </style>
+
+
+</head>
+
+<body>
+<nav class="navbar sticky-top navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="./images/knowledgegraph.png" width="80" height="30" class="d-inline-block align-top" alt=""> JSON2tree
+    </a>
+</nav>
+
+<ul class ="myUL">
+    <li><span class="caret">Summary</span>
+        <ul class ="nested">
+            <li><span class="caret">Llama 2 : </span>
+                <ul class ="nested">
+                    <li><span class="text-h">description : </span><span class="text-c">A collection of pretrained and fine-tuned large language models (LLMs)</span></li>
+                    <li><span class="text-h">range : </span><span class="text-c">7 billion to 70 billion parameters</span></li>
+                    <li><span class="caret">optimization : </span>
+                        <ul class ="nested">
+                            <li><span class="text-h">use_case : </span><span class="text-c">dialogue</span></li>
+                            <li><span class="caret">techniques : [2]</span>
+                                <ul class ="nested">
+                                    <li><span class="text-c">Supervised Fine-Tuning (SFT)</span>
+                                    </li>
+                                    <li><span class="text-c">Reinforcement Learning with Human Feedback (RLHF)</span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><span class="caret">performance : </span>
+                        <ul class ="nested">
+                            <li><span class="text-h">benchmarks : </span><span class="text-c">outperforms open-source chat models on most tests</span></li>
+                            <li><span class="caret">human_evaluations : </span>
+                                <ul class ="nested">
+                                    <li><span class="text-h">helpfulness : </span><span class="text-c">comparable to some closed-source models based on tests</span></li>
+                                    <li><span class="text-h">safety : </span><span class="text-c">measures taken to increase safety through data annotation and tuning</span></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><span class="caret">contributions : </span>
+                        <ul class ="nested">
+                            <li><span class="text-h">see_details : </span><span class="text-c">Section A.1</span></li>
+                        </ul>
+                    </li>
+                    <li><span class="caret">pretraining_methodology : </span>
+                        <ul class ="nested">
+                            <li><span class="text-h">data : </span><span class="text-c">A mix of publicly available sources, excluding Meta user data</span></li>
+                            <li><span class="text-h">training_corpus_size : </span><span class="text-c">2 trillion tokens</span></li>
+                            <li><span class="caret">modifications : </span>
+                                <ul class ="nested">
+                                    <li><span class="text-h">robust_data_cleaning : </span><span class="text-c">None</span></li>
+                                    <li><span class="text-h">data_mix_updates : </span><span class="text-c">None</span></li>
+                                    <li><span class="text-h">context_length : </span><span class="text-c">doubled</span></li>
+                                    <li><span class="text-h">grouped-query_attention : </span><span class="text-c">for larger models</span></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><span class="caret">fine_tuning_methodology : </span>
+                        <ul class ="nested">
+                            <li><span class="text-h">starting_point : </span><span class="text-c">Publicly available instruction tuning data</span></li>
+                            <li><span class="text-h">high_quality_SFT_data_collection : </span><span class="text-c">focus on quality vs quantity</span></li>
+                            <li><span class="caret">RLHF : </span>
+                                <ul class ="nested">
+                                    <li><span class="text-h">human_preference_data_collection : </span><span class="text-c">binary comparison protocol</span></li>
+                                    <li><span class="text-h">reward_model_training : </span><span class="text-c">binary ranking loss, margin component</span></li>
+                                    <li><span class="caret">iterative_fine_tuning : [2]</span>
+                                        <ul class ="nested">
+                                            <li><span class="text-c">Rejection Sampling fine-tuning</span>
+                                            </li>
+                                            <li><span class="text-c">PPO</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><span class="caret">multi_turn_consistency : </span>
+                                <ul class ="nested">
+                                    <li><span class="text-h">technique : </span><span class="text-c">Ghost Attention (GAtt)</span></li>
+                                    <li><span class="text-h">evaluation : </span><span class="text-c">consistent up to 20+ turns</span></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><span class="caret">safety_aspect : </span>
+                        <ul class ="nested">
+                            <li><span class="caret">pretraining_investigations : [3]</span>
+                                <ul class ="nested">
+                                    <li><span class="text-c">demographic_representation</span>
+                                    </li>
+                                    <li><span class="text-c">toxicity_measurement</span>
+                                    </li>
+                                    <li><span class="text-c">language_identification</span>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><span class="caret">fine-tuning_for_safety : </span>
+                                <ul class ="nested">
+                                    <li><span class="caret">categories_and_annotations : </span>
+                                        <ul class ="nested">
+                                            <li><span class="caret">risk_categories : [3]</span>
+                                                <ul class ="nested">
+                                                    <li><span class="text-c">illicit activities</span>
+                                                    </li>
+                                                    <li><span class="text-c">harmful activities</span>
+                                                    </li>
+                                                    <li><span class="text-c">unqualified advice</span>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li><span class="caret">attack_vectors : [3]</span>
+                                                <ul class ="nested">
+                                                    <li><span class="text-c">psychological manipulation</span>
+                                                    </li>
+                                                    <li><span class="text-c">syntactic manipulation</span>
+                                                    </li>
+                                                    <li><span class="text-c">semantic manipulation</span>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li><span class="text-h">safety_guidelines : </span><span class="text-c">mitigate risks through supervision and RLHF</span></li>
+                                        </ul>
+                                    </li>
+                                    <li><span class="caret">RLHF_for_safety : </span>
+                                        <ul class ="nested">
+                                            <li><span class="text-h">annotator_instructions : </span><span class="text-c">prioritize safety over helpfuness if needed</span></li>
+                                            <li><span class="text-h">impact : </span><span class="text-c">decreased toxicity, increased truthfulness after fine-tuning</span></li>
+                                        </ul>
+                                    </li>
+                                    <li><span class="text-h">context_distillation : </span><span class="text-c">teaches model to generate safe outputs</span></li>
+                                    <li><span class="text-h">red_teaming : </span><span class="text-c">proactive risk identification and mitigation</span></li>
+                                </ul>
+                            </li>
+                            <li><span class="caret">evaluation : </span>
+                                <ul class ="nested">
+                                    <li><span class="caret">methods : [2]</span>
+                                        <ul class ="nested">
+                                            <li><span class="text-c">human evaluation</span>
+                                            </li>
+                                            <li><span class="text-c">automatic safety benchmarks</span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><span class="caret">results : </span>
+                                        <ul class ="nested">
+                                            <li><span class="text-h">benchmarks : </span><span class="text-c">improved over open-source models for toxicity and truthfulness</span></li>
+                                            <li><span class="text-h">human_evaluation : </span><span class="text-c">low violation percentage and high safety ratings</span></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li></ul>
+
+
+<script>
+    var toggler = document.getElementsByClassName("caret");
+    var i;
+    for (i = 0; i < toggler.length; i++) {
+        toggler[i].addEventListener("click", function() {
+                this.parentElement.querySelector(".nested").classList.toggle("active");
+                this.classList.toggle("caret-down");
+            }
+        )}
+</script>
+
+
+</body>
+</html>

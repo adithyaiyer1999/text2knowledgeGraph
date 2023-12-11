@@ -1,0 +1,112 @@
+Llama 2's strengths, based on the provided tree, include outperforming open-source chat models on most tests and having a comparable helpfulness to some closed-source models based on tests. Additionally, there are measures taken to increase safety through data annotation and tuning.
+
+<!DOCTYPE html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&family=Oswald&display=swap"
+rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,300&display=swap"
+rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
+
+
+<!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+
+
+<style>
+ul, #myUL {
+    list-style-type: none;
+}
+li {
+    padding-top: 5px;padding-bottom: 5px;
+}
+#myUL {
+    margin: 0;
+    padding: 0;
+}
+.caret {
+    cursor: pointer;
+    user-select: none;
+    font-family: 'Inconsolata', monospace;
+}
+.caret::before {
+    content: " \25B6";
+    display: inline-block;
+margin-right: 6px;
+}
+.caret-down::before {
+    transform: rotate(90deg);
+}
+.nested {
+    display: none;
+}
+.active {
+    display: block;
+}
+.header {
+    text-align: left;
+    background: #f1f1f1;
+}
+.text-c {
+    color:green;
+    font-family:'Inconsolata',monospace;
+}
+.text-h {
+    font-family:'Inconsolata',monospace;
+}
+</style>
+
+
+</head>
+
+<body>
+<nav class="navbar sticky-top navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="./images/knowledgegraph.png" width="80" height="30" class="d-inline-block align-top" alt=""> JSON2tree
+        </a>
+    </nav>
+
+<ul class ="myUL">
+<li><span class="caret">Summary</span>
+<ul class ="nested">
+<li><span class="caret">Llama 2 : </span>
+  <ul class ="nested">
+  <li><span class="caret">performance : </span>
+    <ul class ="nested">
+    <li><span class="caret">benchmarks : </span>
+      <ul class ="nested">
+   <li><span class="text-h">benchmarks : </span><span class="text-c">outperforms open-source chat models on most tests</span></li>
+      <li><span class="caret">human_evaluations : </span>
+        <ul class ="nested">
+    <li><span class="text-h">helpfulness : </span><span class="text-c">comparable to some closed-source models based on tests</span></li>
+    <li><span class="text-h">safety : </span><span class="text-c">measures taken to increase safety through data annotation and tuning</span></li>
+        </ul>
+      </li>
+      </ul>
+    </li>
+    </ul>
+  </li>
+  </ul>
+</li>
+</ul>
+</li></ul>
+
+
+<script>
+var toggler = document.getElementsByClassName("caret");
+var i;
+for (i = 0; i < toggler.length; i++) {
+    toggler[i].addEventListener("click", function() {
+    this.parentElement.querySelector(".nested").classList.toggle("active");
+    this.classList.toggle("caret-down");
+}
+)}
+</script>
+
+
+</body>
+</html>
+...ChatgptResponse...Llama 2's strengths, based on the provided tree, include outperforming open-source chat models on most tests and having a comparable helpfulness to some closed-source models based on tests. Additionally, there are measures taken to increase safety through data annotation and tuning.

@@ -239,6 +239,7 @@ function App() {
     }
     console.log('response:',response);
     const data = await response.text();
+    setbigGraph(data);
     setIsLoading(false);
     console.log('data:',data);
     setOutputHtml(data);
