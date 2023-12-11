@@ -27,7 +27,7 @@ def ask_chatgpt(prompt, model="gpt-3.5-turbo", max_tokens=100):
     Send a prompt to ChatGPT and return the text response.
     """
     client = setup_openai_api()
-    print("prompt gone : ", prompt)
+    # print("prompt gone : ", prompt)
     try:
         response = client.chat.completions.create(
         messages=[

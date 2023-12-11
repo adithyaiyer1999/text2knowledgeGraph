@@ -29,7 +29,7 @@ You are required to answer the following 2 questions :
 
 1. Is the current node more relevant than any of the children nodes : the answer is "Yes" or "No". Only output "No" if a child node is clearly more relevant to the query. Say "Yes" in cases where the query is more general, and the current node is a good way to summarize the query.
 
-2. Which is the children nodes is most relevant : The answer is the exact text of the children nodes
+2. Which of the children nodes is most relevant : The answer is the exact text of the children nodes
 
 Your output should be in the form of a JSON, such as 
 
