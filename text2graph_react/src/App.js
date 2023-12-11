@@ -12,6 +12,7 @@ function App() {
   const [searchText, setSearchText] = useState("");
   const [bigGraph, setbigGraph] = useState("{}");
   const [pdfFile, setPdfFile] = useState(null);
+  const [GPTResponse, setGPTResponse] = useState("Waiting for AGI to respond...");
   
 
   // Load data from txt
@@ -76,10 +77,13 @@ function App() {
     const searchJSON = async () => {
       setIsLoading(true);
 
-      var outputHTMLString = await searchData(searchText);
+      var responseString = await searchData(searchText);
+      var htmlANDresponseList = responseString.split("...ChatgptResponse...")
+      var outputHTMLString = htmlANDresponseList[0]
+      var gptAnswer = htmlANDresponseList[1]
       console.log('Returned data post search', outputHTMLString);
       setOutputHtml(outputHTMLString);
-
+      setGPTResponse(gptAnswer);
       executeScriptFromHtml(outputHTMLString);
 
       // Add this line to reset the input1 state
@@ -284,7 +288,8 @@ if (isLoading) {
         />
     <button className="searchButton" onClick={() => searchJSON(searchText)}>Search</button>
     <button className="reloadButton" onClick={() => reload()}>Reload main graph</button>
-</div>
+    
+</div><textarea className="gptResponseArea" value={GPTResponse} />
                 {rightPanelContent}
             </div>
         </div>

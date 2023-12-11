@@ -39,10 +39,10 @@ def searchGraphFromText_(text, json_text):
     return str_response
 
 def getMostRelevantNode(text, json_text):
-    # lets store the entire path
+    # lets store the entire path, and the graph which comes out of it
     pathToNode = []
-
     graph_dict = json.loads(json_text)
+    original_graph_dict = graph_dict
     # pathToNode.append("Start")
     current_node = "Start"
     children_nodes = list(graph_dict.keys())
@@ -70,8 +70,28 @@ def getMostRelevantNode(text, json_text):
         graph_dict = graph_dict[current_node]
         if len(children_nodes) == 0:
             break
-    return pathToNode, graph_dict
+    
+    # Now we try to create the entire path, and then the tree that comes out of it
+    
+    subtree = graph_dict
+    for element in reversed(pathToNode):
+        final_tree = {}
+        final_tree[element] = subtree
+        subtree = final_tree
 
+    return pathToNode, final_tree
+
+def answerQsFromTextAndGraph_(text, json_text):
+    model = "gpt-4-1106-preview"
+    query_prompt = prompts.ANSWER_FROM_GRAPH_PROMPTS[model]
+    prompt = query_prompt + "\n\n JSON : " + json_text + "\n\nQuestion: " + text + " \n\nAnswer:"
+    response = openai_calls.ask_chatgpt(prompt, model)
+    str_response = str(response)
+    
+    # Some sanity text cleaning to avoid errors in yaml loading
+    str_response = str_response.replace("json", "")
+    str_response = str_response.replace("`", "")
+    return str_response
 
 
 def getNextNodeFromOpenAI(current_node,children_nodes, query):
