@@ -19,7 +19,7 @@ rel="stylesheet">
 <body>
 <nav class="navbar sticky-top navbar-light bg-light">
         <a class="navbar-brand" href="#">
-            <img src="https://raw.githubusercontent.com/abhaykatheria/json2tree/main/J2T.png" width="80" height="30" class="d-inline-block align-top" alt=""> JSON2tree
+            <img src="https://raw.githubusercontent.com/abhaykatheria/json2tree/main/J2T.png" width="80" height="30" class="d-inline-block align-top" alt=""> Your tree : 
         </a>
     </nav>
 """

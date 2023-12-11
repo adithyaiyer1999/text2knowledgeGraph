@@ -12,7 +12,7 @@ import requests
 from . import main_functions
 from . import main_graphmanipulations
 from . import constants
-
+import time
 @csrf_exempt
 @require_POST
 def joinText(request):
@@ -33,6 +33,17 @@ def callOpenAI(request):
 def createGraphFromText(request):
     data = json.loads(request.body)
     text = data.get('text', '')
+
+    if constants.IS_DEMO:
+        if len(text)>constants.THRESHOLD_FOR_ITERATIVE_UPDATE:
+            html_text = constants.HARRY_POTTER_HTML
+            time.sleep(15)
+        else:
+            html_text = constants.YOUTUBE_CACHE_HTML
+            time.sleep(5)
+        
+        return HttpResponse(html_text, content_type="text/html")
+
     print("len(text): ", len(text))
     if len(text)>constants.THRESHOLD_FOR_ITERATIVE_UPDATE:   # This signifies that our text is very big and needs an iterative function to handle this
         print("Entered the iterative Text->JSON")
@@ -51,6 +62,12 @@ def createGraphFromText(request):
 @csrf_exempt
 @require_POST
 def createGraphFromPdf(request):
+
+    if constants.IS_DEMO:
+        html_text = constants.LLAMA_2_CACHE_HTML
+        time.sleep(5)
+        return HttpResponse(html_text, content_type="text/html")
+
     # First let's create a text file from the pdf
     file = request.FILES.get('file')
     reader = PdfReader(file)
@@ -107,8 +124,15 @@ def addToGraphFromText(request):
 @csrf_exempt
 @require_POST
 def searchGraphFromText(request):
+
+    if constants.IS_DEMO:
+        html_text = constants.LLAMA_2_SEARCH_HTML
+        time.sleep(5)
+        return HttpResponse(html_text, content_type="text/html")
+
     data = json.loads(request.body)
     text = data.get('text', '')
+
     response_json = request.session.get('response_json')
     if response_json is not None:
         response_json_smol = main_functions.searchGraphFromText_(text, response_json)

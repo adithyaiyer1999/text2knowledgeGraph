@@ -50,7 +50,7 @@ def createGraphFromText_(text):
     if is_url(text):
         return createGraphFromUrl_(text)
 
-    model = "gpt-4-1106-preview"
+    model =  "gpt-4-1106-preview"
     query_prompt = prompts.CREATE_HIGH_DETAIL_JSON_PROMPTS[model]
     prompt = query_prompt + "\n\n Text: " + text + "\n\nJSON:"
     response = openai_calls.ask_chatgpt(prompt, model)
@@ -81,7 +81,7 @@ def createGraphFromUrl_(url):
     return str_response
 
 def addToGraphFromText_(text, json_text):
-    model = "gpt-3.5-turbo"
+    model = "gpt-4-1106-preview"
     query_prompt = prompts.UPDATE_JSON_PROMPTS[model]
     prompt = query_prompt + "\n\n Paragraph : " + text + "\n\nJSON: " + json_text + " \n\nUpdated JSON:"
     response = openai_calls.ask_chatgpt(prompt, model)
@@ -146,7 +146,7 @@ def getMostRelevantNode(text, json_text):
     return pathToNode, final_tree
 
 def answerQsFromTextAndGraph_(text, json_text):
-    model = "gpt-4-1106-preview"
+    model =  "gpt-4-1106-preview"
     query_prompt = prompts.ANSWER_FROM_GRAPH_PROMPTS[model]
     prompt = query_prompt + "\n\n JSON : " + json_text + "\n\nQuestion: " + text + " \n\nAnswer:"
     response = openai_calls.ask_chatgpt(prompt, model)
@@ -178,7 +178,7 @@ def sepearateListWithCommas(list):
 
 def createGraphFromTextIteratively_(text):
 
-    model = "gpt-4-1106-preview"
+    model =  "gpt-4-1106-preview"
     query_prompt = prompts.CREATE_HIGH_DETAIL_JSON_PROMPTS[model]
     list_of_chunks = []
     # This function will create list of chunks, P.S. the chunks would be created based on max_token_length provided
