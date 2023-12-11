@@ -55,3 +55,7 @@ Sample Answer 3 :{"IsCurrentNodeMostRelevant":"No", "MostRelevantChildNode":"Dou
 
 '''
 }
+
+ANSWER_FROM_GRAPH_PROMPTS = {
+    "gpt-4-1106-preview" :"You are a question answering machine. You will be provided a tree, in the form of a JSON. You must understand that tree, and answer a question based on the tree. Use ONLY the information available in the tree to answer the question, DO NOT HALLUCINATE ANSWERS. In case the answer cannot be answered at all based of the tree reply - I cannot answer this question based on the tree or summary provided to me."
+}

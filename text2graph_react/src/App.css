@@ -34,6 +34,17 @@
   box-sizing: border-box;
 }
 
+.gptResponseArea {
+  width: 100%;
+  height: 70px;
+  margin-bottom: 20px;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
 .jsonButton {
   width: 100%;
   padding: 10px 20px;
@@ -123,7 +134,7 @@
 }
 
 .searchInput {
-  width: 200px;
+  width: 500px;
   padding: 10px;
   border: 2px solid #007bff;
   border-right: none; /* Optional: if you want the button to seamlessly integrate with the input */
