@@ -55,6 +55,7 @@
   border-radius: 5px;
   align-items: center;
   cursor: pointer;
+  margin-top: 15px;
 }
 
 .pdfButton {
@@ -111,21 +112,39 @@
   color: #333;
 }
 
+/*.custom-file-upload {*/
+/*  display: inline-block;*/
+/*  padding: 10px 20px;*/
+/*  cursor: pointer;*/
+/*  border-radius: 5px;*/
+/*  background-color: #4CAF50;*/
+/*  color: white;*/
+/*  border: 1px solid #ccc;*/
+/*  transition: all 0.3s ease;*/
+/*}*/
 .custom-file-upload {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 6px 12px;
   cursor: pointer;
-  border-radius: 5px;
-  background-color: #4CAF50;
-  color: white;
-  border: 1px solid #ccc;
-  transition: all 0.3s ease;
+  background-color: #45a049;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 5px; /* Adjust as needed */
+  margin-bottom: 15px;
+  margin-left: 120px;
+  /* Additional styling */
 }
 
 .custom-file-upload:hover {
-  background-color: #45a049;
+  background-color: #f4f4f4;
 }
 
+.orSeparator {
+  text-align: center;
+  margin: 10px 0;
+  font-size: 16px;
+  /* Additional styling as needed */
+}
 .searchBar {
   display: flex;
   justify-content: center;
