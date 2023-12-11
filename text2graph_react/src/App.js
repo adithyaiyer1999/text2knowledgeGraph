@@ -231,6 +231,7 @@ function App() {
       formData.append('file', pdfFile);
       const response = await fetch('http://127.0.0.1:8000/api/create-graph-from-pdf/', {
           method: 'POST',
+          credentials: 'include',
           body: formData,
       });
     if (!response.ok) {
