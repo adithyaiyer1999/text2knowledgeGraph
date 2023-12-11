@@ -57,11 +57,15 @@ def createGraphFromPdf(request):
     text = ""
     for page in reader.pages:
         text += page.extract_text() + "\n"
-
     print(text)
-
-    # Now let's call the createGraphFromText function
-    response_json = main_functions.createGraphFromText_(text)
+    
+    # Now let's call check the limits of the text and call the appropriate function as above
+    if len(text)>constants.THRESHOLD_FOR_ITERATIVE_UPDATE:   # This signifies that our text is very big and needs an iterative function to handle this
+        print("Entered the iterative Text->JSON")
+        response_json = main_functions.createGraphFromTextIteratively_(text)  # We need to create chunks and summarize iteratively
+    else:
+        print("Entered the normal Text->JSON")
+        response_json = main_functions.createGraphFromText_(text)
     request.session['response_json'] = response_json
     html_text = main_json2tree.generate(response_json)
     print("html_text: ", html_text)
