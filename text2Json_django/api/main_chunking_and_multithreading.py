@@ -5,13 +5,6 @@ from . import openai_calls
 from transformers import GPT2Tokenizer
 
 '''
-    This just gives an estimate of how many tokens are getting created
-'''
-def calculate_token_length(text):
-    tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
-    return len(tokenizer.encode(text))
-
-'''
     This function returns list of chunks created considering max_token_length provided by user.
 '''
 def chunk_text(text, max_token_length):
@@ -60,8 +53,8 @@ def multithreaded_summarized_json(list_of_chunks,model,query_prompt):
     
 
     # Uncomment this for sanity check whether the sequence of json and corresponding json is maintained or not
-#     for i in range(len(list_of_json_summaries)):
-#         print("JSON:",list_of_chunks[i],"Summarize JSON chunk:", list_of_json_summaries[i])
+    # for i in range(len(list_of_json_summaries)):
+    #    print("JSON:",list_of_chunks[i],"Summarize JSON chunk:", list_of_json_summaries[i])
 
     print(len(list_of_json_summaries))
     return list_of_json_summaries
