@@ -68,6 +68,21 @@ def createGraphFromPdf(request):
 
 @csrf_exempt
 @require_POST
+def createGraphFromUrl(request):
+    # First let's create a text file from the pdf
+    data = json.loads(request.body)
+    url = data.get('text', '')
+    response_json = main_functions.createGraphFromUrl_(url)
+    request.session['response_json'] = response_json
+    print("response_json = ",response_json)
+    print("request.session:",request.session)
+    html_text = main_json2tree.generate(response_json)
+    print("html_text: ", html_text)
+    request.session.save()
+    return HttpResponse(html_text, content_type="text/html")
+
+@csrf_exempt
+@require_POST
 def addToGraphFromText(request):
     data = json.loads(request.body)
     text = data.get('text', '')

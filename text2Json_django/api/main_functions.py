@@ -2,9 +2,73 @@ from . import openai_calls
 from . import prompts
 from . import main_chunking_and_multithreading
 from . import constants
+import requests
+from bs4 import BeautifulSoup
+from youtube_transcript_api import YouTubeTranscriptApi
 import json
+import re
+
+def is_url(string):
+    regex = re.compile(
+        r'^(https?://)?'  # http:// or https://
+        r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+'  # domain...
+        r'(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'  # domain name
+        r'localhost|'  # localhost...
+        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|'  # ...or ipv4
+        r'\[?[A-F0-9]*:[A-F0-9:]+\]?)'  # ...or ipv6
+        r'(?::\d+)?'  # optional port
+        r'(?:/?|[/?]\S+)$', re.IGNORECASE)
+
+    return re.match(regex, string) is not None
+
+def get_text_from_url(url):
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, 'html.parser')
+
+    # Extract text from h1, h2, and other text
+    tags = [
+    'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+    'p', 'span', 'strong', 'em', 'blockquote',
+    'ul', 'ol', 'li',
+    'a',
+    'img',
+    'table', 'thead', 'tbody', 'tfoot', 'tr', 'th', 'td',
+    'form', 'input', 'textarea', 'button', 'select', 'option',
+    'div', 'section', 'article', 'header', 'footer', 'nav', 'aside',
+    'br', 'hr', 'label', 'iframe', 'script', 'style'
+]
+    text = ' '.join([tag.get_text() for tag in soup.find_all(tags)])
+    return text
+
+def get_youtube_id(url):
+    regex = r"(?<=v=)[^&#]+"
+    match = re.search(regex, url)
+    return match.group() if match else None
 
 def createGraphFromText_(text):
+    # let's check if the text is only a url, if so parse url/youtube link
+    if is_url(text):
+        return createGraphFromUrl_(text)
+
+    model = "gpt-4-1106-preview"
+    query_prompt = prompts.CREATE_HIGH_DETAIL_JSON_PROMPTS[model]
+    prompt = query_prompt + "\n\n Text: " + text + "\n\nJSON:"
+    response = openai_calls.ask_chatgpt(prompt, model)
+    str_response = str(response)
+    
+    # Some sanity text cleaning to avoid errors in yaml loading
+    str_response = str_response.replace("json", "")
+    str_response = str_response.replace("`", "")
+    return str_response
+
+def createGraphFromUrl_(url):
+    if "youtube" in url:
+        video_id = get_youtube_id(url)
+        transcriptDict = YouTubeTranscriptApi.get_transcript(video_id)
+        transcriptList = [a["text"] for a in transcriptDict]
+        text = " ".join(transcriptList)
+    else:
+        text = get_text_from_url(url)
     model = "gpt-4-1106-preview"
     query_prompt = prompts.CREATE_HIGH_DETAIL_JSON_PROMPTS[model]
     prompt = query_prompt + "\n\n Text: " + text + "\n\nJSON:"
