@@ -52,7 +52,7 @@ def query_gpt_turbo(prompt,content,old_json_string="",model="gpt-3.5-turbo",api_
 def create_chat_completion(client,old_json_string,prompt,content,model):
     ## This is for graph update
     if old_json_string != "":
-        print("inside new one")
+        # print("inside new one")
         chat_completion = client.chat.completions.create(
             messages=[
                 {"role": "system",
@@ -91,11 +91,11 @@ if __name__ == '__main__':
     with open('new_information_to_update','r') as file:
         new_information_to_update = file.read()
     old_json=give_json_string(file_contents)
-    print("old query done")
+    # print("old query done")
     # # print("old json:",old_json)
-    print(update_existing_graph(new_information_to_update,old_json))
-    print("updation done")
-    print(create_html_from_json(old_json))
+    # print(update_existing_graph(new_information_to_update,old_json))
+    # print("updation done")
+    # print(create_html_from_json(old_json))
 
 
 

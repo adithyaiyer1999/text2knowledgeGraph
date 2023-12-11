@@ -19,9 +19,19 @@ def chunk_text(text, max_token_length):
     chunks = []
     current_chunk = ""
 
+    # Adi - We always try to max out token lengths so we can do least number of parallel api calls
+    # this way we max out the tokens per gpt4 api call.
+    approxNumberOfTotTokens = len(text)/4
+    numWorkersThen = int(approxNumberOfTotTokens/max_token_length)+1
+    perWorkerTokenLength = approxNumberOfTotTokens/numWorkersThen
+    print("perWorkerTokenLength: ", perWorkerTokenLength)
+    print("numWorkersThen: ", numWorkersThen)
+    print("approxNumberOfTotTokens: ", approxNumberOfTotTokens)
     for sentence in sentences:
         # Check if adding the next sentence exceeds the max token length
-        if calculate_token_length(current_chunk + sentence) > max_token_length:
+        # Adi - the GPT2 tokenizer used here is causing token limit errors - replacing num tokens by (num chars)/4 as an approximation
+        # legacy - if calculate_token_length(current_chunk + sentence) > perWorkerTokenLength:
+        if len(current_chunk + sentence)/4 > perWorkerTokenLength:
             chunks.append(current_chunk)
             current_chunk = sentence
         else:
@@ -45,7 +55,9 @@ def multithreaded_summarized_json(list_of_chunks,model,query_prompt):
         return str_response
 
     # Use ThreadPoolExecutor to process chunks in parallel
-    with ThreadPoolExecutor(max_workers=constants.NUMBER_OF_WORKERS) as executor:
+    # with ThreadPoolExecutor(max_workers=constants.NUMBER_OF_WORKERS) as executor:
+    #     list_of_json_summaries = list(executor.map(summarize_chunk_to_json, list_of_chunks))
+    with ThreadPoolExecutor(max_workers=len(list_of_chunks)+1) as executor:
         list_of_json_summaries = list(executor.map(summarize_chunk_to_json, list_of_chunks))
 
     # Uncomment this for sanity check whether the sequence of json and corresponding json is maintained or not

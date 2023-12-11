@@ -33,6 +33,7 @@ def callOpenAI(request):
 def createGraphFromText(request):
     data = json.loads(request.body)
     text = data.get('text', '')
+    print("len(text): ", len(text))
     if len(text)>constants.THRESHOLD_FOR_ITERATIVE_UPDATE:   # This signifies that our text is very big and needs an iterative function to handle this
         print("Entered the iterative Text->JSON")
         response_json = main_functions.createGraphFromTextIteratively_(text)  # We need to create chunks and summarize iteratively
