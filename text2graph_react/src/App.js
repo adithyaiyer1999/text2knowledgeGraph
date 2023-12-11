@@ -16,8 +16,15 @@ function App() {
   
 
   // Load data from txt
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
+    const handleRenderGraph = () => {
+      if (pdfFile) {
+          sendPdfFileToBackend();  // Function to handle PDF file upload
+      } else {
+          createJSON();  // Function to process text input
+      }
+  };
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
     if (file) {
         const fileType = file.name.split('.').pop();
 
