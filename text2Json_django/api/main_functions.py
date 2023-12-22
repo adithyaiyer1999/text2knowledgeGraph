@@ -64,9 +64,14 @@ def createGraphFromText_(text):
 def createGraphFromUrl_(url):
     if "youtube" in url:
         video_id = get_youtube_id(url)
-        transcriptDict = YouTubeTranscriptApi.get_transcript(video_id)
-        transcriptList = [a["text"] for a in transcriptDict]
-        text = " ".join(transcriptList)
+        try:
+            transcriptDict = YouTubeTranscriptApi.get_transcript(video_id)
+            transcriptList = [a["text"] for a in transcriptDict]
+            text = " ".join(transcriptList)
+        except Exception as e:
+            print(e)
+            text = "This youtube video does not have a transcript readily available, please try with another link."
+            return str({"Error : ": text})
     else:
         text = get_text_from_url(url)
     model = "gpt-4-1106-preview"
@@ -170,8 +175,11 @@ def getNextNodeFromOpenAI(current_node,children_nodes, query):
     str_response = str_response.replace("`", "")
 
     json_output = json.loads(str_response)
-
-    return json_output["IsCurrentNodeMostRelevant"], json_output["MostRelevantChildNode"]
+    try:
+        return json_output["IsCurrentNodeMostRelevant"], json_output["MostRelevantChildNode"]
+    except Exception as e:
+        print("Exception: ", e)
+        return "Yes", "OPEN AI ERROR"
 
 def sepearateListWithCommas(list):
     return ', '.join(list)

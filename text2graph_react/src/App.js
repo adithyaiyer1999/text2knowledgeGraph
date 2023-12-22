@@ -14,6 +14,7 @@ function App() {
   const [pdfFile, setPdfFile] = useState(null);
   const [GPTResponse, setGPTResponse] = useState("");
   
+  const BASE_URL = 'http://127.0.0.1:8000/api/'
 
   // Load data from txt
     const handleRenderGraph = () => {
@@ -139,7 +140,7 @@ function App() {
   const postData = async (dataToSend) => {
       console.log("Data reached in:", dataToSend)
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/create-graph-from-text/', {
+    const response = await fetch(BASE_URL+'create-graph-from-text/', {
       method: 'POST',
         credentials: 'include',
       headers: {
@@ -169,7 +170,7 @@ function App() {
   const updateData = async (dataToSend) => {
         console.log("Data reached in:", dataToSend)
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/add-to-graph-from-text/', {
+            const response = await fetch(BASE_URL+'add-to-graph-from-text/', {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -200,7 +201,7 @@ function App() {
   const searchData = async (dataToSend) => {
       console.log("Data reached in:", dataToSend)
       try {
-          const response = await fetch('http://127.0.0.1:8000/api/search-graph-from-text/', {
+          const response = await fetch(BASE_URL+'search-graph-from-text/', {
               method: 'POST',
               credentials: 'include',
               headers: {
@@ -229,7 +230,7 @@ function App() {
       setIsLoading(true);
       const formData = new FormData();
       formData.append('file', pdfFile);
-      const response = await fetch('http://127.0.0.1:8000/api/create-graph-from-pdf/', {
+      const response = await fetch(BASE_URL+'create-graph-from-pdf/', {
           method: 'POST',
           credentials: 'include',
           body: formData,
