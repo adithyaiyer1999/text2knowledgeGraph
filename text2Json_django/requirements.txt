@@ -1,0 +1,5 @@
+Django
+openai
+PyPDF2
+youtube-transcript-api
+beautifulsoup4

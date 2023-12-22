@@ -14,7 +14,8 @@ function App() {
   const [pdfFile, setPdfFile] = useState(null);
   const [GPTResponse, setGPTResponse] = useState("");
   
-  const BASE_URL = 'http://127.0.0.1:8000/api/'
+  // const BASE_URL = 'http://127.0.0.1:8000/api/'
+  const BASE_URL = 'https://text2knowledgegraph.onrender.com/api/'
 
   // Load data from txt
     const handleRenderGraph = () => {
