@@ -1,4 +1,5 @@
 Django
+django-cors-headers
 openai
 PyPDF2
 youtube-transcript-api
