@@ -22,5 +22,5 @@ The POST requests should be running now
 1. Go inside react directory, run `cd text2graph_react`.
 3. Run `npm start`
 
-This is successfully start the application.
+This will successfully start the application.
 
