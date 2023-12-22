@@ -7,6 +7,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from . import main_json2tree
 from PyPDF2 import PdfReader
+from . import openai_calls
+from PyPDF2.errors import PdfReadError
 import requests
 # import main_functions
 from . import main_functions
@@ -70,11 +72,19 @@ def createGraphFromPdf(request):
 
     # First let's create a text file from the pdf
     file = request.FILES.get('file')
-    reader = PdfReader(file)
+    try:
+        print("inside try catch")
+        reader = PdfReader(file)
+    except PdfReadError as e:
+        text = str({"pdf_parsing_error":"please check the pdf you have uploaded - our pdf parser is not able to parse it"})
+        html_text = main_json2tree.generate(text)
+        return HttpResponse(html_text, content_type="text/html")
     text = ""
     for page in reader.pages:
         text += page.extract_text() + "\n"
     print(text)
+    
+
     
     # Now let's call check the limits of the text and call the appropriate function as above
     if len(text)>constants.THRESHOLD_FOR_ITERATIVE_UPDATE:   # This signifies that our text is very big and needs an iterative function to handle this
@@ -113,10 +123,14 @@ def addToGraphFromText(request):
     response_json = request.session.get('response_json')
     print("response_json:",response_json)
     if response_json is not None:
-        updated_response_json = main_functions.addToGraphFromText_(text, response_json)
-        changed_color_updated_json=main_graphmanipulations.find_difference_change_color(response_json,updated_response_json)
-        html_text = main_json2tree.generate(str(changed_color_updated_json))
-        return HttpResponse(html_text, content_type="text/html")
+        try: 
+            updated_response_json = main_functions.addToGraphFromText_(text, response_json)
+            changed_color_updated_json=main_graphmanipulations.find_difference_change_color(response_json,updated_response_json)
+            html_text = main_json2tree.generate(str(changed_color_updated_json))
+            return HttpResponse(html_text, content_type="text/html")
+        except Exception as e:
+            html_text = main_json2tree.generate(str({"Error":"Ran out of OpenAI credits/there is some other error, please try again later"}))
+            return HttpResponse(html_text, content_type="text/html")
     else:
          # Handle the case where response_json is not in session
         return JsonResponse({'error': 'Previous graph data not found'})
@@ -124,6 +138,15 @@ def addToGraphFromText(request):
 @csrf_exempt
 @require_POST
 def searchGraphFromText(request):
+
+    # Error handling is difficult with so many calls, so we just check at the start if key is working
+    model =  "gpt-4-1106-preview"
+    query_prompt = "Hello, say yes."
+    prompt = query_prompt
+    response = openai_calls.ask_chatgpt(prompt, model)
+    if "error" in response.keys():
+        html_text = main_json2tree.generate(str({"Error":"Ran out of OpenAI credits, please try again later"}))
+        return HttpResponse(html_text+"...ChatgptResponse..."+"Sorry, no credits left!", content_type="text/html")
 
     if constants.IS_DEMO:
         html_text = constants.LLAMA_2_SEARCH_HTML

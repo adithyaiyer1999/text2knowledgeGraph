@@ -788,4 +788,4 @@ for (i = 0; i < toggler.length; i++) {
 </html>
 '''
 
-IS_DEMO = True
+IS_DEMO = False
