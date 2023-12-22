@@ -273,7 +273,7 @@ if (isLoading) {
         <h1 className="title">Graph Your Story</h1>
         <div className="content">
             <div className="leftPanel">
-                <label className="textLabel">Enter Your Text</label>
+                <label className="textLabel">Enter Text/URL</label>
                 <textarea className="inputArea" value={input1} onChange={(e) => setInput1(e.target.value)} />
 
                 {!isGraphRendered && (
