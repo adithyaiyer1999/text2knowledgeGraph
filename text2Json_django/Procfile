@@ -1,1 +1,1 @@
-web: gunicorn text2Json_django.wsgi:application
+web: gunicorn text2Json_django.wsgi:application --timeout 300
