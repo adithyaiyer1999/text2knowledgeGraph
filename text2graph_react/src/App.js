@@ -4,7 +4,6 @@ import './buffer_loading.css'
 
 function App() {
   const [input1, setInput1] = useState('');
-  const [input2, setInput2] = useState('');
   const [outputHtml, setOutputHtml] = useState('');
   const [isLoading, setIsLoading] = useState(false); // New loading state
   const [isGraphRendered, setIsGraphRendered] = useState(false);
