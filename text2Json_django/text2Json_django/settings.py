@@ -27,7 +27,7 @@ DEBUG = True
 
 SESSION_COOKIE_SECURE = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["text2knowledgegraph.onrender.com"]
 
 
 # Application definition
