@@ -44,7 +44,7 @@ def ask_chatgpt(prompt, model="gpt-3.5-turbo", max_tokens=100):
     except Exception as e:
         print("I am inside the openai exception")
         print(str(e))
-        return {"error" : "Sorry! We ran out of OpenAI credits. If you are someone who finds this useful, reach out to adithyaiyer1999@gmail.com, and I can provide some backup."}
+        return {"error" : "Sorry! We have encountered the following error: "+str(e)+" \nIf you are someone who finds this useful, reach out to adithyaiyer1999@gmail.com, and I can provide some backup."}
 
 # # Example usage
 # if __name__ == "__main__":
