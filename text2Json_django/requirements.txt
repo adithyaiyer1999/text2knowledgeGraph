@@ -6,3 +6,4 @@ youtube-transcript-api
 beautifulsoup4
 PyYAML
 transformers
+gunicorn
