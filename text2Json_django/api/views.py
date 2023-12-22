@@ -138,16 +138,6 @@ def addToGraphFromText(request):
 @csrf_exempt
 @require_POST
 def searchGraphFromText(request):
-
-    # Error handling is difficult with so many calls, so we just check at the start if key is working
-    model =  "gpt-4-1106-preview"
-    query_prompt = "Hello, say yes."
-    prompt = query_prompt
-    response = openai_calls.ask_chatgpt(prompt, model)
-    if "error" in response.keys():
-        html_text = main_json2tree.generate(str({"Error":"Ran out of OpenAI credits, please try again later"}))
-        return HttpResponse(html_text+"...ChatgptResponse..."+"Sorry, no credits left!", content_type="text/html")
-
     if constants.IS_DEMO:
         html_text = constants.LLAMA_2_SEARCH_HTML
         time.sleep(5)
