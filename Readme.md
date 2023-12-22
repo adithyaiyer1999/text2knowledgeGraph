@@ -2,7 +2,7 @@
 
 Welcome to text2Graph, our tool to convert text into a graph or tree format using large language models.
 
-![text2graph](./example.jpeg)
+![text2graph](./example2.png)
 
 
 ## This contains both the react repository and the django repo
