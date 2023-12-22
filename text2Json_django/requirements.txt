@@ -7,4 +7,3 @@ beautifulsoup4
 PyYAML
 transformers
 gunicorn
-pytorch

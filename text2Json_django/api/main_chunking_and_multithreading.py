@@ -2,7 +2,7 @@ from concurrent.futures import ThreadPoolExecutor
 from . import openai_calls
 from . import constants
 from . import openai_calls
-from transformers import GPT2Tokenizer
+# from transformers import GPT2Tokenizer
 
 '''
     This function returns list of chunks created considering max_token_length provided by user.
