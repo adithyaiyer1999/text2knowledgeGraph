@@ -273,6 +273,7 @@ if (isLoading) {
 
   return (
     <div className="App">
+        <h4 className="subtitle">Note : It may take 30-60 sec to load a graph</h4>
         <h1 className="title">Graph Your Story</h1>
         <div className="content">
             <div className="leftPanel">

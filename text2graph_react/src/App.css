@@ -12,6 +12,12 @@
   color: #333;
 }
 
+.subtitle {
+  font-size: 1em;
+  margin: 10px;
+  color: #5b73e1;
+}
+
 .content {
   display: flex;
   justify-content: flex-start;
