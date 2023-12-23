@@ -23,7 +23,8 @@ To get both of them running locally, follow the steps below. There are individua
 1. Go inside django directory, run `cd text2Json_django`.
 2. Add your openAi key to the terminal, run `export OPENAI_API_KEY=sk-your-openai-key`.
 3. Install dependencies via `pip install -r ./text2Json_django/requirements.txt`
-4. Run `python manage.py runserver`
+4. Update `BASE_URL` in `./text2graph_react/src/App.js` to your local port/url.
+5. Run `python manage.py runserver`
 
 The POST requests should be running now
 
